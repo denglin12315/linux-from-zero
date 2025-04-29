@@ -1,2 +1,6 @@
 *.o
+setup
+bootsect
 linux.img
+tools/build
+kernel/system

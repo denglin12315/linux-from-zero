@@ -97,7 +97,7 @@ is_disk1:
     movw $0x0000, %ax
     cld                 # Clear Direction Flag, set string addr from low to high
 
-    /* move system image from 0x0000:0x0000 to 0x1000:0x0000(64KB begin), size is 0x8000 */
+    /* move system image from 0x1000:0x0000(64KB begin) to 0x0000:0x0000, size is 0x8000 */
 do_move:
     movw %ax, %es
     addw $0x1000, %ax

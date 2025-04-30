@@ -44,6 +44,10 @@ rp_sidt:
     lidt idt_descr
     ret
 
+setup_gdt:
+    lgdt gdt_descr
+    ret
+
 /* 我们现在还没有printk函数，通过向显存直接写入字符来模拟它 */
 ignore_int:
     # 中断现场保存
@@ -60,7 +64,7 @@ ignore_int:
     movw %ax,%fs
     # 调用printk函数
     movl $0x96, %edi
-    movb $'I', %al
+    movb $'D', %al
     movb $0x0c, %ah
     movw %ax, %gs:(%edi)
 
@@ -77,8 +81,29 @@ ignore_int:
 .word 0
 idt_descr:
     .word 256 *8-1
+    .long idt
 
-.long idt
+.align 4
+.word 0
+gdt_descr:
+    .word 256 * 8 - 1
+    .long gdt
+
+.align 8
 idt:
     .fill 256,8,0
+
+/*
+ * gdt在setup.S中已经被配置过了，为什么在head.S中还要重新配置一次(两次配置完全一样)?
+ * 原因是setup中使用的GDT位于setup所在的内存，也就是0x90200位置，但是内核真正运行起来
+ * 以后的GDT应该位于内核数据结构中，所以进入head.S以后就需要重新设置，设置很简单，只需
+ * 要和setup中的GDT保持一致就行了
+ */
+gdt:
+    .quad 0x0000000000000000
+    .quad 0x00c09a0000000fff
+    .quad 0x00c0920000000fff
+    .quad 0x00c0f20b8000ffff
+    .quad 0x0000000000000000
+    .fill 251, 8,0
 

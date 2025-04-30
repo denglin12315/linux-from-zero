@@ -184,7 +184,7 @@ end_move:
 
     # jmp to head.s entry
     .byte 0x66, 0xea        # 0x66, 操作数大小前缀（32位指令）, 0xea, ljmp指令（远跳转）
-    # ljmp to 段选择子 0x08（代码段）: 偏移0x00000000
+    # ljmp to 段选择子 0x08（the first entry of gdt 代码段）: 偏移0x00000000
     .long 0x0
     .word 0x8
 
@@ -209,7 +209,7 @@ gdt:
     .word 0x0000
     .word 0x9200
     .word 0x00c0
-    # stack seg
+    # a seg for frame buffer
     .word 0xffff
     .word 0x8000
     .word 0x920b

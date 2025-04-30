@@ -177,6 +177,12 @@ end_move:
     .word 0x00eb, 0x00eb
     outb %al, $0xA1
 
+    # enable irq0 for timer int
+    .word 0x00eb, 0x00eb
+    movb $0xfe, %al
+    outb %al, $0x21             # enable irq0 of master
+
+
     # enter protected mode(set PE<protection enable>)
     movl %cr0, %eax
     xorb $1, %al

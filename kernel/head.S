@@ -12,7 +12,9 @@ startup_32:
 
     /* 构造一个idt */
     call setup_idt
+    call set_clock_idt
     int $0x80           # descriptor_address = IDT_base + 0x80 * 8
+    sti
 
     movl $0x18, %eax
     movw %ax,%gs
@@ -47,6 +49,26 @@ rp_sidt:
 setup_gdt:
     lgdt gdt_descr
     ret
+
+set_clock_idt:
+    leal clock_handle, %edx
+    movl $0x00080000, %eax
+    movw %dx, %ax
+    movw $0x8e00, %dx
+    leal idt,%edi
+    addl $0x100, %edi
+    movl %eax, (%edi)
+    movl %edx, 4(%edi)
+    ret
+
+clock_handle:
+    movl $0x96, %edi
+    incb %gs: (%edi)
+    /*向0x20端口发送E0I, 也就是OCW2的EOI标志，通知8259A将当前处理程序结束,
+     *并通过iret返回, 这样8259a 就可以继续接收下一个中断 */
+    movb $0x20, %al
+    outb %al, $0x20
+    iret
 
 /* 我们现在还没有printk函数，通过向显存直接写入字符来模拟它 */
 ignore_int:

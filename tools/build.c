@@ -102,6 +102,8 @@ int main(int argc, char **argv)
 	if (i > SETUP_SECTS * 512)
 		die("Setup exceeds" STRINGIFY(SETUP_SECTS) " sectors - rewrite build/boot/setup");
 	fprintf(stderr, "Setup is %d bytes.\n", i);
+
+    /* 将setup多余的空间清0 */
 	for (c = 0; c < sizeof(buf); c++)
 		buf[c] ='\0';
 	while (i < SETUP_SECTS * 512)

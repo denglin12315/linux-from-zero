@@ -1,5 +1,5 @@
 GCC:=gcc
-CCFLAG:=-mcpu=i386 -l../include-nostdinc -Wall -fomit-frame-pointer -c
+CCFLAG:=-mcpu=i386 -I../include -nostdinc -Wall -fomit-frame-pointer -c
 LDFLAG:=-Ttext 0x0 -s --oformat binary
 OBJS:=head.o
 system:$(OBJS)

@@ -1,0 +1,5 @@
+https://gitee.com/hinus/linux_kernel_011/blob/master/kernel/head.S
+
+how to run this proj:
+make
+run.sh

@@ -218,7 +218,7 @@ idt_48:
     .word 0
     .word 0,0
 gdt_48:
-    .word 0x800                 # size of gdt
+    .word 0x800                 # size of gdt (256 * 8)
     .word 512+gdt, 0x9          # addr of gdt
 
 setup_msg:

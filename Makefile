@@ -25,4 +25,7 @@ clean:
 	rm -f setup
 	rm -f tools/build
 	rm -f kernel/system
+	rm -f kernel/System.map
+	rm -f kernel/system.elf
+	rm -f kernel/*.o
 	rm -f linux.img

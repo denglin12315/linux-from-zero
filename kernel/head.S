@@ -56,7 +56,7 @@ set_clock_idt:
     movw %dx, %ax
     movw $0x8e00, %dx
     leal idt,%edi
-    addl $0x100, %edi
+    addl $0x100, %edi       # 第0x20个idt描述符，对应int 0x20, 在中断描述符表中的偏移是32 * 8 = 256(0x100)
     movl %eax, (%edi)
     movl %edx, 4(%edi)
     ret

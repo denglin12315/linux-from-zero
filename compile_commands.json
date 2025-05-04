@@ -1,0 +1,51 @@
+[
+    {
+        "arguments": [
+            "gcc",
+            "-c",
+            "-o",
+            "tools/build",
+            "tools/build.c"
+        ],
+        "directory": "/home/ldeng/linux-from-zero",
+        "file": "tools/build.c"
+    },
+    {
+        "arguments": [
+            "gcc",
+            "-c",
+            "-I../include",
+            "-nostdinc",
+            "-ffreestanding",
+            "-Wall",
+            "-fomit-frame-pointer",
+            "-fno-pic",
+            "-fno-stack-protector",
+            "-m32",
+            "-o",
+            "sched.o",
+            "sched.c"
+        ],
+        "directory": "/home/ldeng/linux-from-zero/kernel",
+        "file": "sched.c"
+    },
+    {
+        "arguments": [
+            "gcc",
+            "-c",
+            "-I../include",
+            "-nostdinc",
+            "-ffreestanding",
+            "-Wall",
+            "-fomit-frame-pointer",
+            "-fno-pic",
+            "-fno-stack-protector",
+            "-m32",
+            "-o",
+            "main.o",
+            "main.c"
+        ],
+        "directory": "/home/ldeng/linux-from-zero/kernel",
+        "file": "main.c"
+    }
+]

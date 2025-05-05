@@ -20,12 +20,10 @@ setup:setup.o
 setup.o:setup.S
 	$(AS) -o $@ $<
 clean:
-	rm -f *.o
-	rm -f bootsect
-	rm -f setup
-	rm -f tools/build
-	rm -f kernel/system
-	rm -f kernel/System.map
-	rm -f kernel/system.elf
-	rm -f kernel/*.o
-	rm -f linux.img
+	-rm *.o
+	-rm bootsect
+	-rm setup
+	-rm tools/build
+	-rm linux.img
+	cd kernel; make clean; cd ..
+

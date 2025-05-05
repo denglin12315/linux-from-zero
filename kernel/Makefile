@@ -25,8 +25,8 @@ sched.o: sched.c
 	$(GCC) $(CCFLAG) -o $@ $<
 
 clean:
-	rm *.o
-	rm system
-	rm system.elf
-	rm System.map
+	-rm *.o
+	-rm system
+	-rm system.elf
+	-rm System.map
 

@@ -1,15 +1,14 @@
 #define __LIBRARY__
 
+#include <linux/tty.h>
+
 void main(void)
 {
-    __asm__("int $0x80\n\r"::);
+    tty_init();
 
-#if 1
     __asm__ __volatile__(
         "loop:\n\r"
-        "jmp loop"::);
-#else
-    while(1);
-#endif
+        "jmp loop"
+        ::);
 }
 

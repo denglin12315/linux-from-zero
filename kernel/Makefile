@@ -7,7 +7,7 @@ LDFLAG := -Ttext 0x0 -s --oformat binary -m elf_i386
 INCDIR := ../include
 
 
-OBJS:=head.o main.o sched.o
+OBJS:=head.o main.o sched.o chr_drv/chr_drv.a
 
 system: $(OBJS)
 	$(LD) $(LDFLAG) -M -e startup_32 -o $@ $^ > System.map
@@ -21,8 +21,12 @@ main.o: main.c
 sched.o: sched.c
 	$(GCC) $(CCFLAG) -o $@ $<
 
+chr_drv/chr_drv.a: chr_drv/*.c
+	cd chr_drv; make chr_drv.a; cd ..
+
 clean:
 	rm -f *.o
 	rm -f system
 	rm -f System.map
+	cd chr_drv; make clean; cd ..
 

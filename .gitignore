@@ -4,3 +4,5 @@ bootsect
 linux.img
 tools/build
 kernel/system
+kernel/System.map
+kernel/chr_drv/chr_drv.a

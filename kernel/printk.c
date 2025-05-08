@@ -24,7 +24,7 @@ int printk(const char* fmt, ...) {
             "addl  $8, %%esp\n\t"
             "popl  %0\n\t"
             "popw  %%fs"
-            ::"r"(i):"ax", "cx", "dx");
+            ::"r"(i):"ax", "cx", "dx");     /* 根据调用约定，eax, ecx, edx是caller-saved */
 
     return i;
 }

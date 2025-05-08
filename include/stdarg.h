@@ -3,12 +3,11 @@
 
 typedef char *va_list;
 
-/* Amount of space required in an argument list for an arg of type TYPE.
- *    TYPE may alternatively be an expression whose type is used.  */
-
+/* 确保任何类型的参数都占用4字节栈空间 */
 #define __va_rounded_size(TYPE)  \
       (((sizeof (TYPE) + sizeof (int) - 1) / sizeof (int)) * sizeof (int))
 
+/* 计算传入printk的倒数第二个参数(实际上就是fmt上面那个参数,看栈视图) */
 #ifndef __sparc__
 #define va_start(AP, LASTARG)                       \
      (AP = ((char *) &(LASTARG) + __va_rounded_size (LASTARG)))
@@ -18,9 +17,9 @@ typedef char *va_list;
         AP = ((char *) &(LASTARG) + __va_rounded_size (LASTARG)))
 #endif
 
-void va_end (va_list);      /* Defined in gnulib */
-#define va_end(AP)
+#define va_end(AP)      /* 空操作，x86上va_end啥也不做 */
 
+/* 返回AP地址对应的args的值 */
 #define va_arg(AP, TYPE)                        \
      (AP += __va_rounded_size (TYPE),                   \
         *((TYPE *) (AP - __va_rounded_size (TYPE))))

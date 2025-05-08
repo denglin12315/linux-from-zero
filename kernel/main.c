@@ -7,7 +7,7 @@ void main(void)
 {
     tty_init();
 
-    printk("here is ldeng:%d\r\n", 35);
+    printk("\r\nhere is ldeng:%d\r\n", 35);
 
     __asm__ __volatile__(
         "loop:\n\r"

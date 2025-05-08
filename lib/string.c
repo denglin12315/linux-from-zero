@@ -1,6 +1,6 @@
 #include <string.h>
 
-inline char * strcpy(char * dest,const char *src) {
+char * strcpy(char * dest,const char *src) {
 __asm__("cld\n"
     "1:\tlodsb\n\t"
     "stosb\n\t"
@@ -10,7 +10,7 @@ __asm__("cld\n"
 return dest;
 }
 
-inline char * strncpy(char * dest,const char *src,int count) {
+char * strncpy(char * dest,const char *src,int count) {
 __asm__("cld\n"
     "1:\tdecl %2\n\t"
     "js 2f\n\t"
@@ -25,7 +25,7 @@ __asm__("cld\n"
 return dest;
 }
 
-inline char * strcat(char * dest,const char * src) {
+char * strcat(char * dest,const char * src) {
 __asm__("cld\n\t"
     "repne\n\t"
     "scasb\n\t"
@@ -38,7 +38,7 @@ __asm__("cld\n\t"
 return dest;
 }
 
-inline char * strncat(char * dest,const char * src,int count) {
+char * strncat(char * dest,const char * src,int count) {
 __asm__("cld\n\t"
     "repne\n\t"
     "scasb\n\t"
@@ -57,7 +57,7 @@ __asm__("cld\n\t"
 return dest;
 }
 
-inline int strcmp(const char * cs,const char * ct) {
+int strcmp(const char * cs,const char * ct) {
 register int __res __asm__("ax");
 __asm__("cld\n"
     "1:\tlodsb\n\t"
@@ -75,7 +75,7 @@ __asm__("cld\n"
 return __res;
 }
 
-inline int strncmp(const char * cs,const char * ct,int count)
+int strncmp(const char * cs,const char * ct,int count)
 {
 register int __res __asm__("ax");
 __asm__("cld\n"
@@ -96,7 +96,7 @@ __asm__("cld\n"
 return __res;
 }
 
-inline char * strchr(const char * s,char c)
+char * strchr(const char * s,char c)
 {
 register char * __res __asm__("ax");
 __asm__("cld\n\t"
@@ -113,7 +113,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline char * strrchr(const char * s,char c)
+char * strrchr(const char * s,char c)
 {
 register char * __res __asm__("dx");
 __asm__("cld\n\t"
@@ -129,7 +129,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline int strspn(const char * cs, const char * ct)
+int strspn(const char * cs, const char * ct)
 {
 register char * __res __asm__("si");
 __asm__("cld\n\t"
@@ -153,7 +153,7 @@ __asm__("cld\n\t"
 return __res-cs;
 }
 
-inline int strcspn(const char * cs, const char * ct)
+int strcspn(const char * cs, const char * ct)
 {
 register char * __res __asm__("si");
 __asm__("cld\n\t"
@@ -177,7 +177,7 @@ __asm__("cld\n\t"
 return __res-cs;
 }
 
-inline char * strpbrk(const char * cs,const char * ct)
+char * strpbrk(const char * cs,const char * ct)
 {
 register char * __res __asm__("si");
 __asm__("cld\n\t"
@@ -204,7 +204,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline char * strstr(const char * cs,const char * ct)
+char * strstr(const char * cs,const char * ct)
 {
 register char * __res __asm__("ax");
 __asm__("cld\n\t"
@@ -231,7 +231,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline int strlen(const char * s)
+int strlen(const char * s)
 {
     const char* p = s;
     while (*p) p++;
@@ -239,7 +239,7 @@ inline int strlen(const char * s)
 }
 
 
-inline void * memcpy(void * dest,const void * src, int n)
+void * memcpy(void * dest,const void * src, int n)
 {
 __asm__("cld\n\t"
     "rep\n\t"
@@ -249,7 +249,7 @@ __asm__("cld\n\t"
 return dest;
 }
 
-inline void * memmove(void * dest,const void * src, int n)
+void * memmove(void * dest,const void * src, int n)
 {
 if (dest<src)
 __asm__("cld\n\t"
@@ -266,7 +266,7 @@ __asm__("std\n\t"
 return dest;
 }
 
-inline int memcmp(const void * cs,const void * ct,int count)
+int memcmp(const void * cs,const void * ct,int count)
 {
 register int __res __asm__("ax");
 __asm__("cld\n\t"
@@ -282,7 +282,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline void * memchr(const void * cs,char c,int count)
+void * memchr(const void * cs,char c,int count)
 {
 register void * __res __asm__("di");
 if (!count)
@@ -298,7 +298,7 @@ __asm__("cld\n\t"
 return __res;
 }
 
-inline void * memset(void * s,char c,int count)
+void * memset(void * s,char c,int count)
 {
 __asm__("cld\n\t"
     "rep\n\t"
@@ -310,7 +310,7 @@ return s;
 
 char * ___strtok;
 
-inline char * strtok(char * s,const char * ct) {
+ char * strtok(char * s,const char * ct) {
 register char * __res __asm__("si");
 __asm__("testl %1,%1\n\t"
     "jne 1f\n\t"

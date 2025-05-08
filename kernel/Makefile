@@ -7,7 +7,7 @@ LDFLAG := -Ttext 0x0 -s --oformat binary -m elf_i386
 INCDIR := ../include
 
 
-OBJS:=head.o main.o sched.o printk.o vsprintf.o chr_drv/chr_drv.a ../lib/lib.a 
+OBJS:=head.o main.o sched.o printk.o vsprintf.o chr_drv/chr_drv.a ../mm/mm.o ../lib/lib.a
 
 system: $(OBJS)
 	$(LD) $(LDFLAG) -M -e startup_32 -o $@ $^ > System.map
@@ -29,6 +29,9 @@ vsprintf.o : vsprintf.c
 
 chr_drv/chr_drv.a: chr_drv/*.c
 	cd chr_drv; make chr_drv.a; cd ..
+
+../mm/mm.o : ../mm/*.c
+	cd ../mm; make mm.o; cd ../kernel
 
 ../lib/lib.a : ../lib/*.c
 	cd ../lib; make lib.a; cd ../kernel

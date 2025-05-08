@@ -1,4 +1,6 @@
 *.o
+.cache/*
+compile_commands.json
 setup
 bootsect
 linux.img

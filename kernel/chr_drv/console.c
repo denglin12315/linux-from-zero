@@ -359,8 +359,9 @@ static void restore_cur() {
     gotoxy(saved_x, saved_y);
 }
 
-void console_print(const char *buf,int nr)
+void console_print(unsigned channel, const char *buf,int nr)
 {
+    (void)channel;
     const char *s=buf;
 
     while(nr--) {
@@ -436,6 +437,6 @@ void con_init(void)
 
     gotoxy(ORIG_X, ORIG_Y);
     set_cursor();
-    console_print("\r\nhello\r\nldeng", 14);
+    console_print(1, "\r\nhello\r\nldeng", 14);
 }
 

@@ -7,13 +7,16 @@ LDFLAG := -Ttext 0x0 -s --oformat binary -m elf_i386
 INCDIR := ../include
 
 
-OBJS:=head.o main.o sched.o printk.o vsprintf.o chr_drv/chr_drv.a ../mm/mm.o ../lib/lib.a
+OBJS:=head.o sys_call.o main.o sched.o printk.o vsprintf.o chr_drv/chr_drv.a ../mm/mm.o ../lib/lib.a
 
 system: $(OBJS)
 	$(LD) $(LDFLAG) -M -e startup_32 -o $@ $^ > System.map
 
 head.o: head.S
 	$(GCC) -m32 -traditional -c -o $@ $<
+
+sys_call.o : sys_call.S
+	$(GCC) $(USE_DEBUG) -m32 -traditional -c -o $@ $<
 
 main.o: main.c
 	$(GCC) $(CCFLAG) -o $@ $<

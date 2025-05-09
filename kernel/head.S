@@ -86,7 +86,7 @@ ignore_int:
     movl $0x18, %eax
     movw %ax, %gs
     movl  $0x96, %edi
-    movb  $'I', %al
+    movb  $'R', %al
     movb  $0x0c, %ah
     movw  %ax,   %gs:(%edi)
     popw  %fs

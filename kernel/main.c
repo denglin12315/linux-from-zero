@@ -1,6 +1,7 @@
 #define __LIBRARY__
 
 #include <linux/tty.h>
+#include <linux/sched.h>
 #include <linux/kernel.h>
 
 extern void mem_init(long start, long end);
@@ -27,10 +28,16 @@ void main(void)
 
     main_memory_start = buffer_memory_end;
     mem_init(main_memory_start, memory_end);
+
+    sched_init();
     
     tty_init();
 
     printk("\r\nmemory start:%d, end:%d\r\n", main_memory_start, memory_end);
+    __asm__ __volatile__ (
+        "int $0x80\n\r"
+        ::
+    );
 
     while(1);
 }

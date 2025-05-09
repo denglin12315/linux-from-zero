@@ -422,7 +422,6 @@ void con_init(void)
             //部分代码略
         }
     }
-
     /* 打印display_desc string  */
     display_ptr=((char *)video_mem_start) + video_size_row - 8;
     while (*display_desc) {
@@ -437,6 +436,6 @@ void con_init(void)
 
     gotoxy(ORIG_X, ORIG_Y);
     set_cursor();
-    console_print(1, "\r\nhello\r\nldeng", 14);
+
 }
 
